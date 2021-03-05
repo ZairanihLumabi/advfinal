@@ -21,7 +21,12 @@
         // Check if username is empty
         if (empty(trim($_POST['username']))) {
             $usernameErr = 'Please enter username';
-        } else {
+        } else if(preg_match('/[^a-zA-Z0-9]+/',trim($_POST['username']))){
+          $usernameErr = 'Only alphanumeric is accepted';
+        } else if (strlen(trim($_POST['username'])) > 10) {
+          $usernameErr = 'Maximum of 10 characters only';
+        }
+        else {
             $username = trim($_POST['username']);
         }
 
@@ -120,7 +125,7 @@
                 <div class="form-group">
                     <input type="submit" class="btn btn-primary" value="Login">
                 </div>
-                <p>Don't have an account? <a href="login.php">Register</a></p>
+                <p>Don't have an account? <a href="register.php">Register</a></p>
             </form>
         </div>
     </body>
